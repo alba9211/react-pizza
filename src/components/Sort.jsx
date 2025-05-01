@@ -5,6 +5,8 @@ import { setSortType } from "../redux/slices/filterSlice";
 export default function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
+  const sortRef = React.useRef();
+  console.log(sortRef);
   const list = [
     {
       name: "популярности (DESC)",
@@ -40,9 +42,21 @@ export default function Sort() {
     dispatch(setSortType(obj));
     setOpen(false);
   };
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (open && !event.composedPath().includes(sortRef.current)) {
+        setOpen(false);
+        console.log("кли вне области");
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, [open]);
   // console.log("Sort");
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"

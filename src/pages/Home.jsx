@@ -54,6 +54,7 @@ export const Home = () => {
 
     window.scrollTo(0, 0);
   }, [categoryId, sortType, searchValue, currentPage]);
+  console.log(items);
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
   const skeleton = [...new Array(12)].map((_, index) => (
