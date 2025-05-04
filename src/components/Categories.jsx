@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import increment from "../redux/slices/filterSlice";
 
 export default function Categories({ value, onChangeCategory }) {
-  // const count = useSelector((state) => state.counter.count);
-  // const dispatch = useDispatch();
   const category = [
     "Все",
     "Мясные",

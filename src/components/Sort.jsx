@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setSortType } from "../redux/slices/filterSlice";
+import { selectSort, setSortType } from "../redux/slices/filterSlice";
 
 export default function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector(selectSort);
   const sortRef = React.useRef();
   console.log(sortRef);
   const list = [
@@ -47,7 +47,6 @@ export default function Sort() {
     const handleClickOutside = (event) => {
       if (open && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
-        console.log("кли вне области");
       }
     };
 

@@ -1,20 +1,24 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCategoryId, setPageCount } from "../redux/slices/filterSlice";
-import { fetchPizzas } from "../redux/slices/pizzaSlice";
+import {
+  selectFilter,
+  setCategoryId,
+  setPageCount,
+} from "../redux/slices/filterSlice";
+import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice";
 
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/Index";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import { Pagination } from "../components/Pagination";
-import { SearchContext } from "../App";
 
 export const Home = () => {
-  const categoryId = useSelector((state) => state.filter.categoryId);
+  const { searchValue, categoryId, currentPage } = useSelector(selectFilter);
   const sortType = useSelector((state) => state.filter.sort.sortProperty);
-  const currentPage = useSelector((state) => state.filter.pageCount);
-  const { items, status } = useSelector((state) => state.pizza);
+  console.log(sortType);
+
+  const { items, status } = useSelector(selectPizzaData);
 
   const dispatch = useDispatch();
 
@@ -25,7 +29,6 @@ export const Home = () => {
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
-  const { searchValue } = React.useContext(SearchContext);
 
   const getPizzas = async () => {
     const sortBy = sortType.replace("-", "");
