@@ -16,7 +16,6 @@ import { Pagination } from "../components/Pagination";
 export const Home = () => {
   const { searchValue, categoryId, currentPage } = useSelector(selectFilter);
   const sortType = useSelector((state) => state.filter.sort.sortProperty);
-  console.log(sortType);
 
   const { items, status } = useSelector(selectPizzaData);
 
@@ -52,8 +51,6 @@ export const Home = () => {
   React.useEffect(() => {
     getPizzas();
   }, [categoryId, sortType, searchValue, currentPage]);
-
-  console.log(items);
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
   const skeleton = [...new Array(12)].map((_, index) => (
