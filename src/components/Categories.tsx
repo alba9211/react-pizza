@@ -2,7 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import increment from "../redux/slices/filterSlice";
 
-export default function Categories({ value, onChangeCategory }) {
+type CategoriesProps = {
+  value: number;
+  onChangeCategory: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
   const category = [
     "Все",
     "Мясные",
@@ -27,4 +32,6 @@ export default function Categories({ value, onChangeCategory }) {
       </ul>
     </div>
   );
-}
+};
+
+export default Categories;

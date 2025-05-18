@@ -5,10 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { setPizza } from "../redux/slices/fullPizzaSlice";
 
 const FullPizza = () => {
-  const { pizza } = useSelector((state) => state.fullPizza);
+  // const { pizza } = useSelector((state) => state.fullPizza);
 
-  const dispatch = useDispatch();
-  // const [pizza, setPizza] = React.useState();
+  // const dispatch = useDispatch();
+  const [pizza, setPizza] = React.useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -18,7 +22,8 @@ const FullPizza = () => {
         const { data } = await axios.get(
           `https://67dae01535c87309f52e6ed5.mockapi.io/pizza/` + id
         );
-        dispatch(setPizza(data));
+        // dispatch(setPizza(data));
+        setPizza(data);
       } catch (error) {
         alert("Ошибка загрузки данных");
         navigate("/");
@@ -36,7 +41,6 @@ const FullPizza = () => {
     <div className="container">
       <img src={pizza.imageUrl} alt={pizza.title} />
       <h2 className="pizza-block__title">{pizza.title}</h2>
-
       <h4 className="pizza-block__price">{pizza.price} ₽</h4>
     </div>
   );

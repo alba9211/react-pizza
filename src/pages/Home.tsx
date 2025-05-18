@@ -4,28 +4,29 @@ import {
   selectFilter,
   setCategoryId,
   setPageCount,
-} from "../redux/slices/filterSlice";
-import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice";
+  selectSortProperty,
+} from "../redux/slices/filterSlice.js";
+import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice.js";
 
-import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import PizzaBlock from "../components/PizzaBlock/Index";
-import Skeleton from "../components/PizzaBlock/Skeleton";
-import { Pagination } from "../components/Pagination";
+import Categories from "../components/Categories.tsx";
+import Sort from "../components/Sort.tsx";
+import PizzaBlock from "../components/PizzaBlock/Index.tsx";
+import Skeleton from "../components/PizzaBlock/Skeleton.jsx";
+import { Pagination } from "../components/Pagination/index.tsx";
 
-export const Home = () => {
+export const Home: React.FC = () => {
   const { searchValue, categoryId, currentPage } = useSelector(selectFilter);
-  const sortType = useSelector((state) => state.filter.sort.sortProperty);
+  const sortType = useSelector(selectSortProperty);
 
   const { items, status } = useSelector(selectPizzaData);
 
   const dispatch = useDispatch();
 
-  const onChangePage = (number) => {
+  const onChangePage = (number: number) => {
     dispatch(setPageCount(number));
   };
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
@@ -36,6 +37,7 @@ export const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         sortBy,
         order,
@@ -52,7 +54,7 @@ export const Home = () => {
     getPizzas();
   }, [categoryId, sortType, searchValue, currentPage]);
 
-  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
   const skeleton = [...new Array(12)].map((_, index) => (
     <Skeleton key={index} />
   )); // Рендерим 6 скелетонов
