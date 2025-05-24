@@ -12,3 +12,8 @@ declare module "*.module.scss" {
   const classes: { [key: string]: string }; // Объект с классами
   export default classes;
 }
+
+// declare module "*.scss" {
+//   const value: string;
+//   export default value;
+// }

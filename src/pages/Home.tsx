@@ -11,7 +11,7 @@ import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice.js";
 import Categories from "../components/Categories.tsx";
 import Sort from "../components/Sort.tsx";
 import PizzaBlock from "../components/PizzaBlock/Index.tsx";
-import Skeleton from "../components/PizzaBlock/Skeleton.jsx";
+import Skeleton from "../components/PizzaBlock/Skeleton.tsx";
 import { Pagination } from "../components/Pagination/index.tsx";
 
 export const Home: React.FC = () => {
