@@ -3,7 +3,7 @@ import logoSvg from "../assets/img/pizza-logo.svg";
 import { Search } from "./Search/index.tsx";
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectCart } from "../redux/slices/cartSlice";
+import { selectCart } from "../redux/slices/cartSlice.ts";
 
 export default function Header() {
   const { price, items } = useSelector(selectCart);
@@ -26,7 +26,7 @@ export default function Header() {
             </div>
           </div>
         </Link>
-        <Search />
+        {pathname !== "/cart" && <Search />}
         <div className="header__cart">
           {pathname !== "/cart" && (
             <Link to="/cart" className="button button--cart">

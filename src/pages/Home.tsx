@@ -1,18 +1,23 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectFilter,
   setCategoryId,
   setPageCount,
   selectSortProperty,
-} from "../redux/slices/filterSlice.js";
-import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzaSlice.js";
+} from "../redux/slices/filterSlice.ts";
+import {
+  fetchPizzas,
+  PizzaType,
+  selectPizzaData,
+} from "../redux/slices/pizzaSlice.ts";
 
 import Categories from "../components/Categories.tsx";
 import Sort from "../components/Sort.tsx";
 import PizzaBlock from "../components/PizzaBlock/Index.tsx";
 import Skeleton from "../components/PizzaBlock/Skeleton.tsx";
 import { Pagination } from "../components/Pagination/index.tsx";
+import { useAppDispatch } from "../redux/store.ts";
 
 export const Home: React.FC = () => {
   const { searchValue, categoryId, currentPage } = useSelector(selectFilter);
@@ -20,41 +25,45 @@ export const Home: React.FC = () => {
 
   const { items, status } = useSelector(selectPizzaData);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onChangePage = (number: number) => {
     dispatch(setPageCount(number));
   };
 
-  const onChangeCategory = (id: number) => {
-    dispatch(setCategoryId(id));
-  };
+  const onChangeCategory = React.useCallback(
+    (id: number) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch]
+  );
 
-  const getPizzas = async () => {
+  const getPizzas = React.useCallback(async () => {
     const sortBy = sortType.replace("-", "");
     const order = sortType.includes("-") ? "asc" : "desc";
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
-      //@ts-ignore
       fetchPizzas({
         sortBy,
         order,
         category,
         search,
-        currentPage,
+        currentPage: String(currentPage),
       })
     );
 
     window.scrollTo(0, 0);
-  };
+  }, [dispatch, categoryId, sortType, searchValue, currentPage]);
 
   React.useEffect(() => {
     getPizzas();
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [getPizzas]);
 
-  const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
+  const pizzas = items.map((obj: PizzaType) => (
+    <PizzaBlock key={obj.id} {...obj} />
+  ));
   const skeleton = [...new Array(12)].map((_, index) => (
     <Skeleton key={index} />
   )); // Рендерим 6 скелетонов
