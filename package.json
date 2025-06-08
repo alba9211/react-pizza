@@ -23,6 +23,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.17.0",
     "sass": "^1.86.0",
     "typescript": "^5.8.3",
     "web-vitals": "^2.1.4"
