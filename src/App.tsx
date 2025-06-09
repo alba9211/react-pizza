@@ -7,6 +7,7 @@ import { Home } from "./pages/Home.tsx";
 import { Route, Routes } from "react-router-dom";
 
 import { Loader } from "./components/Spinner.tsx";
+import SkeletonFullPizza from "./pages/SkeletonFullPizza.tsx";
 // import FullPizza from "./pages/FullPizza.tsx";
 
 const Cart = React.lazy(
@@ -38,7 +39,7 @@ function App() {
           <Route
             path="/pizza/:id"
             element={
-              <Suspense fallback={<div>Загрузка...</div>}>
+              <Suspense fallback={<SkeletonFullPizza />}>
                 {" "}
                 <FullPizza />{" "}
               </Suspense>

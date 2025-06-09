@@ -5,6 +5,11 @@
   text-align: center;
   margin-bottom: 65px;
 
+  &__full {
+    width: 380px;
+    margin-top: 40px;
+  }
+
   &-wrapper {
     display: flex;
     justify-content: center;
@@ -14,10 +19,27 @@
     width: 260px;
   }
 
+  &__full__image {
+    width: 460px;
+  }
+
   &__title {
     font-size: 20px;
     font-weight: 900;
     letter-spacing: 1%;
+    margin-bottom: 20px;
+  }
+  &__full__title {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 1%;
+    margin-bottom: 20px;
+  }
+
+  &__ingredients {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
     margin-bottom: 20px;
   }
 
@@ -66,4 +88,16 @@
     line-height: 27px;
     letter-spacing: 0.015em;
   }
+}
+
+.full__pizza {
+  ul {
+    li {
+      font-size: 16px;
+    }
+  }
+}
+
+.full__bottom {
+  margin-top: 40px;
 }

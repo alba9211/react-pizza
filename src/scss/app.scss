@@ -61,6 +61,12 @@ body {
     }
   }
 
+  &__full__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 11px;
+  }
+
   &__top {
     display: flex;
     align-items: center;
